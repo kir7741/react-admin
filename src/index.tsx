@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App title="Andy is gay" />
   </React.StrictMode>,
   document.getElementById('root')
 );
