@@ -6,14 +6,80 @@ type Props = {
   title: string;
 };
 
-class App extends React.Component<Props> {
+type State = {
+  isLogin: boolean
+}
+
+class App extends React.Component<Partial<Props>, Partial<State>> {
+
+  constructor(props: Partial<Props>) {
+    super(props);
+    this.state = {
+      isLogin: false
+    };
+  }
+
+  handleClick(e: React.MouseEvent, name: string) {
+    this.setState((prevState) => ({ isLogin: !prevState.isLogin }));
+  }
+
+  getGreetingComponent(): JSX.Element {
+    const isLogin = this.state.isLogin;
+    if (isLogin) {
+      return <p>welcome back!</p>
+    }
+
+    return <p>login first!</p>
+  }
+
+  getListCompoent(): JSX.Element {
+
+    const list = [
+      {
+        id: 1,
+        name: 'Leo'
+      },
+      {
+        id: 2,
+        name: 'Andy'
+      },
+      {
+        id: 3,
+        name: 'Joseph'
+      }
+    ]
+
+    const ListEle = list.map((ele) => {
+      return (
+        <option 
+          key={ele.id}
+          value={ele.id}
+        >
+          {ele.name}
+        </option>
+      );
+    });
+
+    return (
+      <select>
+        {ListEle}
+      </select>
+    )
+
+  }
 
   render() {
+
+    const Greeting = () => this.getGreetingComponent();
+    const PeopleSelect = () => this.getListCompoent();
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1>{this.props.title}</h1>
+          <h1 onClick={(e) => this.handleClick(e, 'Andy')}>{this.props.title}</h1>
+          <Greeting/>
+          <PeopleSelect/>
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
