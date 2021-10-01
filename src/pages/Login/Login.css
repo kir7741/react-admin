@@ -1,0 +1,19 @@
+.Login {  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  min-height: 500px;
+  background: #edf1f7;
+}
+
+.Login-form {
+  padding: 1rem;
+  width: 50%;
+  min-width: 350px;
+  max-width: 500px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+}
+
