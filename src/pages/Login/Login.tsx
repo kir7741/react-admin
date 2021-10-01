@@ -1,13 +1,27 @@
 import { Button, Form, Input } from 'antd';
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import './Login.css';
 
+class Login extends React.Component<RouteComponentProps> {
 
-class Login extends React.Component {
 
-  clickLogin(e: any): void {
-    console.log(e);
+  constructor(props: RouteComponentProps) {
+    super(props)
+    this.clickLogin = this.clickLogin.bind(this);
   }
+
+  clickLogin(e: any) {
+    this.props.history.push('/dashboard?id=1', {
+      data: '2'
+    });
+  }
+
+  // clickLogin = (e: any) => {
+  //   console.log(e);
+  //   console.log(this);
+  //   // (this.props as any).history.push('/dashboard');
+  // }
 
   render() {
 
@@ -16,9 +30,12 @@ class Login extends React.Component {
         <Form
           className="Login-form"
           name="loginForm"
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 20 }}
+          layout="vertical"
           autoComplete="off"
+          initialValues={{
+            account: '',
+            pwd: ''
+          }}
           onFinish={this.clickLogin}
         >
           <h2>登入</h2>
@@ -31,7 +48,7 @@ class Login extends React.Component {
           </Form.Item>
           <Form.Item
             label="密碼"
-            name="password"
+            name="pwd"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input.Password />

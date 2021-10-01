@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import logo from './logo.svg';
 import './App.css';
 import Dashboard from './pages/Dashboard/Dashboard';
@@ -19,11 +19,21 @@ class App extends React.Component {
   render() {
     
     return (
-      <div className="App">
-        
-        <Login/>
-        {/* <Dashboard/> */}
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/dashboard" component={Dashboard} />
+
+            {/* 預設路由 */}
+            <Route exact path="/">
+              <Redirect to="/login" />
+            </Route>
+            {/* 路由錯誤處理 */}
+            <Redirect to="/dashboard" />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
