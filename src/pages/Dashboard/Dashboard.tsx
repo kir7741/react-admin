@@ -9,19 +9,58 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
+import MenuItem from 'antd/lib/menu/MenuItem';
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider, Content, Footer,  } = Layout;
+const { SubMenu } = Menu;
 
 type DashboardState = {
-  collapsed: boolean
+  collapsed: boolean,
+  menuList: any[]
 };
 
 
 class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
 
-  state: DashboardState = {
-    collapsed: false,
-  };
+  constructor(props: RouteComponentProps) {
+    super(props);
+    console.log(props);
+
+    this.state = {
+      collapsed: false,
+      menuList: [
+        {
+          id: 1,
+          icon: <UserOutlined />,
+          menuName: 'User',
+          link: '',
+          subMenus: [
+            {
+              id: 12,
+              icon: <UserOutlined />,
+              menuName: 'Account',
+              link: ''
+            }
+          ]
+        },
+        {
+          id: 2,
+          icon: <VideoCameraOutlined />,
+          menuName: 'video',
+          link: '',
+          subMenus: []
+        },
+        {
+          id: 3,
+          icon: <UploadOutlined />,
+          menuName: 'upload',
+          link: '',
+          subMenus: []
+        }
+      ]
+    };
+
+  }
 
   toggle = () => {
 
@@ -31,16 +70,50 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
 
   };
 
-  constructor(props: RouteComponentProps) {
-    super(props);
-    console.log(props);
-    // const routeParams = new URLSearchParams(props.location.search);
-    // console.log(routeParams);
-    // this.clickLogin = this.clickLogin.bind(this);
+  getMenuComponent(): JSX.Element {
+
+    const menuList = this.state.menuList;
+
+    return (
+      <Menu theme="dark" mode="inline" defaultOpenKeys={['1']} defaultSelectedKeys={['12']}>
+        {this.getMenuItemComponents(menuList)}
+      </Menu>
+    );
+  }
+
+  getMenuItemComponents(menuList: any[]): JSX.Element[] {
+
+    return menuList.map((menu) => {
+      const subMenus = menu.subMenus;
+      if (Array.isArray(subMenus) && subMenus.length > 0) {
+        return (
+          <SubMenu 
+            key={menu.id} 
+            icon={menu.icon} 
+            title={menu.menuName}
+          >
+            {this.getMenuItemComponents(subMenus)}
+          </SubMenu>
+        );
+      } else {
+        return (
+          <MenuItem 
+            key={menu.id}
+            icon={menu.icon}
+          >
+            {menu.menuName}
+          </MenuItem>
+        );
+      }
+
+    });
+
   }
 
 
   render() {
+
+    const menuItems = this.getMenuComponent();
 
     return (
       <Layout className="Dashboard-layout">
@@ -48,17 +121,7 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
           <div className="logo">
             <div></div>
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
-            </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
-            </Menu.Item>
-          </Menu>
+          {menuItems}
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }}>
