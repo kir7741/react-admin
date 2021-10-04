@@ -1,16 +1,35 @@
-.Login {  
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.Dashboard-layout .trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.Dashboard-layout .trigger:hover {
+  color: #1890ff;
+}
+
+/* #components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+} */
+
+.site-layout .site-layout-background {
+  background: #ffffff;
+}
+
+.Dashboard-layout {
   height: 100vh;
-  min-height: 500px;
 }
 
-.Login-form {
-  padding: 1rem;
-  width: 50%;
-  min-width: 350px;
-  max-width: 500px;
-  background-color: aquamarine;
+.Dashboard-layout .logo {
+  padding: 0.7rem;
+  height: 64px;
 }
 
+.Dashboard-layout .logo > * {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+}

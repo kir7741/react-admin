@@ -53,7 +53,10 @@ class Login extends React.Component<RouteComponentProps> {
           >
             <Input.Password />
           </Form.Item>
-          <Form.Item wrapperCol={{ span: 24 }}>
+          <Form.Item 
+            className="btn-group"
+            wrapperCol={{ span: 24 }}
+          >
             <Button type="primary" htmlType="submit">
               登入
             </Button>
