@@ -23,7 +23,8 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route exact path="/login" component={Login} />
-            <Route exact path="/dashboard" component={Dashboard} />
+            {/* 確認一下是否有其他寫法 */}
+            <Route path="/dashboard" component={Dashboard} />
 
             {/* 預設路由 */}
             <Route exact path="/">

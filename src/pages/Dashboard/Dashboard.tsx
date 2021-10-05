@@ -1,15 +1,26 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { 
+  RouteComponentProps, 
+  Route, 
+  Switch, 
+  Link,
+  Redirect
+} from 'react-router-dom';
 import './Dashboard.css';
 import { Layout, Menu } from 'antd';
 import {
+  AreaChartOutlined,
+  FormOutlined,
+  DatabaseOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
 } from '@ant-design/icons';
 import MenuItem from 'antd/lib/menu/MenuItem';
+
+import FormDemo from '../FormDemo/FormDemo';
+import ChartDemo from '../ChartDemo/ChartDemo';
+import TableDemo from '../TableDemo/TableDemo';
+
 
 const { Header, Sider, Content, Footer,  } = Layout;
 const { SubMenu } = Menu;
@@ -31,30 +42,36 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
       menuList: [
         {
           id: 1,
-          icon: <UserOutlined />,
-          menuName: 'User',
+          icon: <AreaChartOutlined />,
+          menuName: 'Chart',
           link: '',
           subMenus: [
             {
               id: 12,
-              icon: <UserOutlined />,
-              menuName: 'Account',
-              link: ''
+              icon: <AreaChartOutlined/>,
+              menuName: 'Line',
+              link: 'chart'
+            },
+            {
+              id: 13,
+              icon: <AreaChartOutlined/>,
+              menuName: 'Pie',
+              link: 'chart'
             }
           ]
         },
         {
           id: 2,
-          icon: <VideoCameraOutlined />,
-          menuName: 'video',
-          link: '',
+          icon:<FormOutlined />,
+          menuName: 'Form',
+          link: 'form',
           subMenus: []
         },
         {
           id: 3,
-          icon: <UploadOutlined />,
-          menuName: 'upload',
-          link: '',
+          icon: <DatabaseOutlined />,
+          menuName: 'Table',
+          link: 'table',
           subMenus: []
         }
       ]
@@ -70,17 +87,36 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
 
   };
 
+  /**
+   * 初始化目錄欄位
+   *
+   * @returns {JSX.Element}
+   * @memberof Dashboard
+   */
   getMenuComponent(): JSX.Element {
 
     const menuList = this.state.menuList;
 
     return (
-      <Menu theme="dark" mode="inline" defaultOpenKeys={['1']} defaultSelectedKeys={['12']}>
+      <Menu 
+        theme="dark" 
+        mode="inline" 
+        defaultOpenKeys={['1']} 
+        defaultSelectedKeys={['12']}
+        onClick={(e) => this.clickItem(e)}
+      >
         {this.getMenuItemComponents(menuList)}
       </Menu>
     );
   }
 
+  /**
+   * 初始化目錄內容
+   *
+   * @param {any[]} menuList
+   * @returns {JSX.Element[]}
+   * @memberof Dashboard
+   */
   getMenuItemComponents(menuList: any[]): JSX.Element[] {
 
     return menuList.map((menu) => {
@@ -101,13 +137,26 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
             key={menu.id}
             icon={menu.icon}
           >
-            {menu.menuName}
+            <Link to={`${this.props.match.url}/${menu.link}`}>
+              {menu.menuName}
+            </Link>
           </MenuItem>
         );
       }
 
     });
 
+  }
+
+  /**
+   * 測試用點擊事件 
+   *
+   * @param {*} e
+   * @memberof Dashboard
+   */
+  clickItem(e: any): void {
+    console.log(e)
+    // this.props.history.push(....);
   }
 
 
@@ -132,15 +181,13 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
               })
             }
           </Header>
-          <Content
-            className="site-layout-background"
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-            }}
-          >
-            Content
+          <Content className="site-layout-background">
+            <Switch>
+              <Route exact path={`${this.props.match.url}/form`} component={FormDemo} />
+              <Route exact path={`${this.props.match.url}/chart`} component={ChartDemo} />
+              <Route exact path={`${this.props.match.url}/table`} component={TableDemo} />
+              <Redirect to="/dashboard" />
+            </Switch>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
