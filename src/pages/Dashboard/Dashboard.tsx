@@ -4,6 +4,7 @@ import {
   Route, 
   Switch, 
   Link,
+  NavLink,
   Redirect
 } from 'react-router-dom';
 import './Dashboard.css';
@@ -35,7 +36,6 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
 
   constructor(props: RouteComponentProps) {
     super(props);
-    console.log(props);
 
     this.state = {
       collapsed: false,
@@ -44,19 +44,20 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
           id: 1,
           icon: <AreaChartOutlined />,
           menuName: 'Chart',
-          link: '',
+          link: 'dashboard-default',
           subMenus: [
             {
               id: 12,
               icon: <AreaChartOutlined/>,
               menuName: 'Line',
-              link: 'chart'
+              link: 'line-chart',
+
             },
             {
               id: 13,
               icon: <AreaChartOutlined/>,
               menuName: 'Pie',
-              link: 'chart'
+              link: 'pie-chart',
             }
           ]
         },
@@ -65,14 +66,14 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
           icon:<FormOutlined />,
           menuName: 'Form',
           link: 'form',
-          subMenus: []
+          subMenus: [],
         },
         {
           id: 3,
           icon: <DatabaseOutlined />,
           menuName: 'Table',
           link: 'table',
-          subMenus: []
+          subMenus: [],
         }
       ]
     };
@@ -97,12 +98,14 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
 
     const menuList = this.state.menuList;
 
+    const { location } = this.props;
+
     return (
       <Menu 
         theme="dark" 
         mode="inline" 
-        defaultOpenKeys={['1']} 
-        defaultSelectedKeys={['12']}
+        defaultOpenKeys={['dashboard-default']} 
+        defaultSelectedKeys={[location.pathname]}
         onClick={(e) => this.clickItem(e)}
       >
         {this.getMenuItemComponents(menuList)}
@@ -119,12 +122,14 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
    */
   getMenuItemComponents(menuList: any[]): JSX.Element[] {
 
+    const { match } = this.props;
+
     return menuList.map((menu) => {
       const subMenus = menu.subMenus;
       if (Array.isArray(subMenus) && subMenus.length > 0) {
         return (
           <SubMenu 
-            key={menu.id} 
+            key={menu.link}
             icon={menu.icon} 
             title={menu.menuName}
           >
@@ -134,12 +139,14 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
       } else {
         return (
           <MenuItem 
-            key={menu.id}
+            key={`${match.url}/${menu.link}`}
             icon={menu.icon}
           >
-            <Link to={`${this.props.match.url}/${menu.link}`}>
+            <NavLink 
+              to={`${this.props.match.url}/${menu.link}`}
+            >
               {menu.menuName}
-            </Link>
+            </NavLink>
           </MenuItem>
         );
       }
@@ -155,7 +162,6 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
    * @memberof Dashboard
    */
   clickItem(e: any): void {
-    console.log(e)
     // this.props.history.push(....);
   }
 
@@ -184,9 +190,15 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
           <Content className="site-layout-background">
             <Switch>
               <Route exact path={`${this.props.match.url}/form`} component={FormDemo} />
-              <Route exact path={`${this.props.match.url}/chart`} component={ChartDemo} />
+              <Route exact path={`${this.props.match.url}/line-chart`} component={ChartDemo} />
+              <Route exact path={`${this.props.match.url}/pie-chart`} component={ChartDemo} />
               <Route exact path={`${this.props.match.url}/table`} component={TableDemo} />
-              <Redirect to="/dashboard" />
+              {/* <Redirect to="/dashboard" /> */}
+              <Route exact path={`${this.props.match.url}`} >
+                <Redirect to={`${this.props.match.url}/line-chart`} />
+              </Route>
+              <Redirect to={`${this.props.match.url}/table`} />
+
             </Switch>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>

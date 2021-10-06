@@ -12,16 +12,10 @@ class Login extends React.Component<RouteComponentProps> {
   }
 
   clickLogin(e: any) {
-    this.props.history.push('/dashboard?id=1', {
+    this.props.history.push('/dashboard/line-chart', {
       data: '2'
     });
   }
-
-  // clickLogin = (e: any) => {
-  //   console.log(e);
-  //   console.log(this);
-  //   // (this.props as any).history.push('/dashboard');
-  // }
 
   render() {
 
