@@ -186,7 +186,7 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
               <Route exact path={`${this.props.match.url}/form`} component={FormDemo} />
               <Route exact path={`${this.props.match.url}/chart`} component={ChartDemo} />
               <Route exact path={`${this.props.match.url}/table`} component={TableDemo} />
-              <Redirect to="/dashboard" />
+              <Redirect to="/dashboard/chart" />
             </Switch>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
