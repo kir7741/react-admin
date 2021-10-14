@@ -15,7 +15,6 @@ import Login from './pages/Login/Login';
 
 class App extends React.Component {
 
-
   render() {
     
     return (

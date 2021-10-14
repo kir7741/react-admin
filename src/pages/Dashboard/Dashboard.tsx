@@ -27,6 +27,7 @@ const { Header, Sider, Content, Footer,  } = Layout;
 const { SubMenu } = Menu;
 
 type DashboardState = {
+  joseph: string,
   collapsed: boolean,
   menuList: any[]
 };
@@ -34,10 +35,13 @@ type DashboardState = {
 
 class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
 
+
+
   constructor(props: RouteComponentProps) {
     super(props);
 
     this.state = {
+      joseph: 'a',
       collapsed: false,
       menuList: [
         {
@@ -165,6 +169,12 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
     // this.props.history.push(....);
   }
 
+  componentDidMount() {
+    // setInterval(() => {
+    //   this.setState((pre) => ({joseph: pre.joseph + 'a'}));
+    // }, 1000)
+  }
+
 
   render() {
 
@@ -189,7 +199,11 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
           </Header>
           <Content className="site-layout-background">
             <Switch>
-              <Route exact path={`${this.props.match.url}/form`} component={FormDemo} />
+              <Route exact path={`${this.props.match.url}/form`} 
+                render={(props) => (<FormDemo {...props} joseph={ this.state.joseph } />)}
+              >
+
+              </Route>
               <Route exact path={`${this.props.match.url}/line-chart`} component={ChartDemo} />
               <Route exact path={`${this.props.match.url}/pie-chart`} component={ChartDemo} />
               <Route exact path={`${this.props.match.url}/table`} component={TableDemo} />
