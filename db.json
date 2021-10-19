@@ -1,0 +1,43 @@
+{
+  "account": {
+    "name": "andy",
+    "logo": "logo1.jpg",
+    "menuList": [
+      {
+        "id": 1,
+        "icon": "<AreaChartOutlined />",
+        "menuName": "Chart",
+        "link": "dashboard-default",
+        "subMenus": [
+          {
+            "id": 12,
+            "icon": "<AreaChartOutlined/>",
+            "menuName": "Line",
+            "link": "line-chart"
+
+          },
+          {
+            "id": 13,
+            "icon": "<AreaChartOutlined/>",
+            "menuName": "Pie",
+            "link": "pie-chart"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "icon": "<FormOutlined />",
+        "menuName": "Form",
+        "link": "form",
+        "subMenus": []
+      },
+      {
+        "id": 3,
+        "icon": "<DatabaseOutlined />",
+        "menuName": "Table",
+        "link": "table",
+        "subMenus": []
+      }
+    ]
+  }
+}

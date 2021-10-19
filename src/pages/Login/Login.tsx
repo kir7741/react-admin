@@ -2,6 +2,7 @@ import { Button, Form, Input } from 'antd';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import './Login.css';
+import { getUser } from 'src/Api/account.service';
 
 class Login extends React.Component<RouteComponentProps> {
 
@@ -12,9 +13,13 @@ class Login extends React.Component<RouteComponentProps> {
   }
 
   clickLogin(e: any) {
-    this.props.history.push('/dashboard/line-chart', {
-      data: '2'
-    });
+    getUser().then((d) => {
+      console.log(d);
+    })
+
+    // this.props.history.push('/dashboard/line-chart', {
+    //   data: '2'
+    // });
   }
 
   render() {

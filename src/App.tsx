@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import logo from './logo.svg';
 import './App.css';
-import Dashboard from './pages/Dashboard/Dashboard';
-import Login from './pages/Login/Login';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Login from './Pages/Login/Login';
 
 // type Props = {
 //   title: string;

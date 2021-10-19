@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import ProgressDIY from '../../shared/Progress/ProgressDIY';
+import ProgressDIY from '../../Shared/Progress/ProgressDIY';
 import { ProgressContext } from '../../Context/ProgressContext';
 
 
