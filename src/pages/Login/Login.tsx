@@ -13,9 +13,16 @@ class Login extends React.Component<RouteComponentProps> {
   }
 
   clickLogin(e: any) {
+    console.log('REACT_APP_URL', process.env.REACT_APP_API)
+    console.log('NODE_ENV', process.env.NODE_ENV)
+    console.log('REACT_APP_ENV', process.env.REACT_APP_ENV)
     getUser().then((d) => {
       console.log(d);
     })
+
+    // getOther().then((d) => {
+    //   console.log(d);
+    // })
 
     // this.props.history.push('/dashboard/line-chart', {
     //   data: '2'
