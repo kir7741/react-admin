@@ -1,5 +1,5 @@
 {
-  "/api/accountApi": "/accountApi",
-  "/api/josephApi": "/josephApi",
+  "/api/account": "/account",
+  "/api/joseph": "/joseph",
   "/api/dashboard": "/dashboard"
 }

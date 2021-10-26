@@ -20,7 +20,12 @@
   background: #ffffff;
   margin: 24px 16px;
   padding: 24px;
-  min-height: 280px,
+
+} 
+
+.site-layout .site-layout-background.content {
+  overflow: auto;
+  min-height: 280px;
 }
 
 .Dashboard-layout {

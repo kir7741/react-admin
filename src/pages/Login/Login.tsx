@@ -1,8 +1,18 @@
-import { Button, Form, Input } from 'antd';
 import React from 'react';
+import { Button, Form, Input } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
+
+// service
+import { AccountSvc } from 'src/Api/account.service';
+
+// storage
+import { Storage } from 'src/Core/Storage/storage';
+
+// Enum
+import { StorageType } from 'src/Enums/storage-type.enum';
+
+// css
 import './Login.css';
-import { getUser } from 'src/Api/account.service';
 
 class Login extends React.Component<RouteComponentProps> {
 
@@ -16,17 +26,13 @@ class Login extends React.Component<RouteComponentProps> {
     console.log('REACT_APP_URL', process.env.REACT_APP_API)
     console.log('NODE_ENV', process.env.NODE_ENV)
     console.log('REACT_APP_ENV', process.env.REACT_APP_ENV)
-    getUser().then((d) => {
-      console.log(d);
+    AccountSvc.getUser().then((user) => {
+      Storage.store('user', user, StorageType.SESSION);
     })
 
-    // getOther().then((d) => {
-    //   console.log(d);
-    // })
-
-    // this.props.history.push('/dashboard/line-chart', {
-    //   data: '2'
-    // });
+    this.props.history.push('/dashboard/line-chart', {
+      data: '2'
+    });
   }
 
   render() {

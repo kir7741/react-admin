@@ -1,5 +1,5 @@
 {
-  "accountApi": {
+  "account": {
     "name": "andy",
     "logo": "logo1.jpg",
     "menuList": [
@@ -40,7 +40,7 @@
       }
     ]
   },
-  "josephApi": {
+  "joseph": {
     "tall": "yes"
   },
   "dashboard": {

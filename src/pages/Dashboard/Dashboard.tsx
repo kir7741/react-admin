@@ -3,7 +3,6 @@ import {
   RouteComponentProps, 
   Route, 
   Switch, 
-  Link,
   NavLink,
   Redirect
 } from 'react-router-dom';
@@ -34,8 +33,6 @@ type DashboardState = {
 
 
 class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
-
-
 
   constructor(props: RouteComponentProps) {
     super(props);
@@ -197,7 +194,7 @@ class Dashboard extends React.Component<RouteComponentProps, DashboardState> {
               })
             }
           </Header>
-          <Content className="site-layout-background">
+          <Content className="site-layout-background content">
             <Switch>
               <Route exact path={`${this.props.match.url}/form`} 
                 render={(props) => (<FormDemo {...props} joseph={ this.state.joseph } />)}

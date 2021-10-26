@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+  text-align: left;
+  border-radius: 2px 2px 0 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+table > tbody > tr > td, table > thead > tr > th {
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+  padding: 16px;
+  overflow-wrap: break-word;
+  border: 1px solid #aaa;
+  border-width: 0 0 1px 0;
+}

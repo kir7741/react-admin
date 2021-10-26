@@ -1,9 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { createStore } from 'redux';
 // import logo from './logo.svg';
 import './App.css';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Login from './Pages/Login/Login';
+import checktoggleList from './Reducers/checkBoxToggle.reducer';
 
 // type Props = {
 //   title: string;
@@ -13,11 +16,15 @@ import Login from './Pages/Login/Login';
 //   isLogin: boolean
 // }
 
+const store = createStore(checktoggleList);
+
 class App extends React.Component {
+
 
   render() {
     
     return (
+    <Provider store={store}>
       <BrowserRouter>
         <div className="App">
           <Switch>
@@ -34,6 +41,8 @@ class App extends React.Component {
           </Switch>
         </div>
       </BrowserRouter>
+    </Provider>
+
     );
   }
 }
