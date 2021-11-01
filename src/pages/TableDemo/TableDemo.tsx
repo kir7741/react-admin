@@ -7,15 +7,17 @@ import { CheckedBoxInfo } from 'src/Models/check-box-info.model';
 // import { Provider, useStore, useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { CheckBoxActionType } from 'src/ActionCreator/checkBoxToggle.action';
-import { checkBoxSet } from '../../ActionCreator/checkBoxToggle.action';
+import { checkBoxSet, addBoxSet } from '../../ActionCreator/checkBoxToggle.action';
 
 // css 
+import clsx from 'clsx';
 import './TableDemo.css';
 
 interface TableProps extends RouteComponentProps {
   list: CheckedBoxInfo[];
 
   setList: () => void;
+  addNew: () => void;
 }
 
 const checkList = [
@@ -46,6 +48,9 @@ const mapDispatchToProps = (dispatch: (arg: CheckBoxActionType) => CheckBoxActio
   return {
     setList: () => {
       dispatch(checkBoxSet(checkList))
+    },
+    addNew: () => {
+      dispatch(addBoxSet('new Text'))
     }
   };
 };
@@ -69,43 +74,56 @@ let TableDemo: React.FC<Partial<TableProps>> = (props: Partial<TableProps>) => {
   })
 
   return (
+
     <div>
-      <table>
-        <thead>
-        <tr>
-          <th>操作</th>
-          <th>內容</th>
-          <th>id</th>
-        </tr>
-        </thead>
+      <div className="table-container">
+        <table>
+          <thead>
+          <tr>
+            <th>操作</th>
+            <th>內容</th>
+            <th>id</th>
+          </tr>
+          </thead>
 
-        <tbody>
-          {
+          <tbody>
+            {
+              
+              props.list.map((d) => {
+                return (
+                  
+                  <tr 
+                    key={d.id}
+                    className={clsx({
+                      selected: d.checked 
+                    })}
+                  >
+                    <td>
+                      <JizzCheckBox 
+                        id={d.id}
+                      ></JizzCheckBox>
+                    </td>
+                    <td>{d.content}</td>
+                    <td>{d.id}</td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </table>
+      </div>
 
-            
-            props.list.map((d) => {
-              return (
-                
-                <tr 
-                  key={d.id}
-                  style={d.checked ? {backgroundColor: '#88d'} : null }
-                >
-                  <td>
-                    <JizzCheckBox 
-                      id={d.id}
-                    ></JizzCheckBox>
-                  </td>
-                  <td>{d.content}</td>
-                  <td>{d.id}</td>
-                </tr>
-              )
-            })
-          }
-        </tbody>
-      </table>
+      <div>
+        <button
+          onClick={() => props.addNew()}
+
+        >
+          Add a row
+        </button>
+      </div>
 
     </div>
-   
+
   )
 
 }

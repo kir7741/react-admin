@@ -1,16 +1,36 @@
-table {
+
+.table-container {
+  border-top: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
+}
+
+.table-container table {
   width: 100%;
   text-align: left;
   border-radius: 2px 2px 0 0;
   border-collapse: separate;
   border-spacing: 0;
+
 }
 
-table > tbody > tr > td, table > thead > tr > th {
-  border-bottom: 1px solid #f0f0f0;
+.table-container table > thead > tr > th {
   position: relative;
-  padding: 16px;
   overflow-wrap: break-word;
-  border: 1px solid #aaa;
-  border-width: 0 0 1px 0;
+  background: #fafafa;
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  border-width: 0 1px 1px 0;
+}
+
+.table-container table > tbody > tr > td {
+  position: relative;
+  overflow-wrap: break-word;
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  border-width: 0 1px 1px 0;
+}
+
+.table-container table > tbody > tr.selected { 
+  background-color: #1890ff;
+  color: #fff;
 }

@@ -46,6 +46,11 @@ const checktoggleList = (state: CheckedBoxInfo[] = [], action: CheckBoxActionTyp
       return state.map(checkInfo =>
         checktoggle(checkInfo, action)
       );
+    case 'ADD_CHECKBOX':
+        const id = Math.max(...state.map(info => +info.id));
+        action.id = (id + 1) + '';
+        return state.concat(new CheckedBoxInfo(action));
+    
     default:
       return state
   }
